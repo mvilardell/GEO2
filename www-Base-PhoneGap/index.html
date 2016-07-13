@@ -58,7 +58,7 @@
             <a href="#page2" id="manda" class="miBoton posicionBoton" ></a>
         </div><!---FIN PAGINA MAPA--->
     	
-        <div data-role="page" id="page2">
+        <div data-role="page" id="page2" onload="getTipus();">
         	<div data-role="header">
             	<h1>Mi formulario</h1>
             </div>
@@ -79,7 +79,7 @@
                       <label for="LongX">Longitud:</label>
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
-	       <div data-role="fieldcontain" onload="getTipus();">
+	       <div data-role="fieldcontain">
                       <label id="TipusList"></label>
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
