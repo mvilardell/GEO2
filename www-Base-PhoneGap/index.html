@@ -11,7 +11,6 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script src="JS/GoogleMaps.js"></script>
         <link rel="stylesheet" href="CSS/index.css" />
-		<script src="JS/getTipus.js"></script>
         <script>
 		$(function() {
 			$("#guardardatos").click(function() {
@@ -42,13 +41,32 @@
 				}
 			
 			});
-			
+			$("#BuscarTipus").click(function() {
+				$.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/phptest/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: BuscarTipus
+					});
+				
+				function BuscarTipus(data) {
+						$('#TipusList').html(data);
+			});
 		</script>
-		<script type ="text/javascript">
+		<!--<script type ="text/javascript">
 			$("document").ready(function(){
-				$("#TipusList").load("http://www.grupllobet.com/apptest/geotest2/getTipus.php");
+				
+				//$("#TipusList").load("php/getTipus.php");
+				
+				$.ajax({type:"POST",
+						url: php/getTipus.php /*http://www.grupllobet.com/apptest/geotest2/getTipus.php"*/
+						dataType:'html',
+						success:function(data) {
+						$('#TipusList').html(data);   
+  }
+});
 			})
-		</script>
+		</script>-->
     </head>
 
     <body>
@@ -63,32 +81,29 @@
             <a href="#page2" id="manda" class="miBoton posicionBoton" ></a>
         </div><!---FIN PAGINA MAPA--->
     	
-        <div data-role="page" id="page2">
+        <div data-role="page" id="page2" style="background-color:gray">
         	<div data-role="header">
             	<h1>Mi formulario</h1>
             </div>
             <!--------INICIA FORMULARIO------>
             <div data-role="fieldcontain">
-                      <label for="Nombre">Nombre:</label>
+                      <label for="Nombre"><h3>Nombre:</h3></label>
                       <input type="text" name="Nombre" id="Nombre" value=""  />
                </div>
                <div data-role="fieldcontain">
-                      <label for="Descripcion">Descripcion:</label>
+                      <label for="Descripcion"><h3>Descripcion:</h3></label>
                      <textarea cols="40" rows="8"  name="Descripcion" id="Descripcion" value=""  /></textarea>
                </div>
                <div data-role="fieldcontain">
-                      <label for="LatY">Latitud:</label>
+                      <label for="LatY"><h3>Latitud:</h3></label>
                       <input type="text" disabled="disabled" name="LatY" id="LatY" value=""  />
                </div>
                <div data-role="fieldcontain">
-                      <label for="LongX">Longitud:</label>
+                      <label for="LongX"><h3>Longitud:</h3></label>
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
-			   <div data-role="fieldcontain">
-			   <label>tipus</label>
-               <select id="TipusList">
-			   
-			   </select>
+			   <button type="button" id="BuscarTipus">Obtenir Tipus</button>
+			   <div id='TipusList'>             
 					  
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
