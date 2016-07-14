@@ -50,7 +50,10 @@
 					});
 				});
 				function BuscarTipus(data) {
-					$.('#TipusList').alert(data);
+					$.('#TipusList').html("");
+					for (var i in data){
+						$.("#TipusList").append(data[i]);
+					}
 					//$.('#TipusList').innerHTML(data);
 			
 				}
@@ -118,8 +121,8 @@
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
 			   
-			   <div id='TipusList'>             
-					  
+			   <div data-role="fieldcontain">             
+					<p id="TipusList"></p>
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
 			   <button type="button" onclick="window.location.href='index.html'">Torna a l'inici</button>
