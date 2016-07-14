@@ -50,7 +50,7 @@
 					});
 				
 				function BuscarTipus(data) {
-						$('#TipusList').html(data);
+						$.mobile.changePage('#TipusList');
 			});
 		</script>
 		<!--<script type ="text/javascript">
@@ -103,7 +103,7 @@
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
 			   <button type="button" id="BuscarTipus">Obtenir Tipus</button>
-			   <div id='TipusList'>             
+			   <div data-role="page" id='TipusList'>             
 					  
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
