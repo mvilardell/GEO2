@@ -41,32 +41,47 @@
 				}
 			
 			});
-			$("#BuscarTipus").click(function() {
-				$.ajax({type: "POST",
+			$("#TipusList").ready(function (){       
+					$.ajax({type: "POST",
 						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
 						cache: false,
 						dataType: "text",
 						success: BuscarTipus
 					});
-				
+				});
+				function BuscarTipus(data) {
+					alert(data);
+						//$.('#TipusList').html(data);
+			
+				}
+			/*$("#BuscarTipus").click(function() {
+				 $.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: BuscarTipus
+					});
+				});
 				function BuscarTipus(data) {
 						$.mobile.changePage('#TipusList');
-			});
+			});*/
 		</script>
-		<!--<script type ="text/javascript">
-			$("document").ready(function(){
+		
+		<script type ="text/javascript">
+		
+			<!--$("document").ready(function(){
 				
-				//$("#TipusList").load("php/getTipus.php");
+				/*$("#TipusList").load("php/getTipus.php");
 				
 				$.ajax({type:"POST",
-						url: php/getTipus.php /*http://www.grupllobet.com/apptest/geotest2/getTipus.php"*/
+						url: php/getTipus.php /*http://www.grupllobet.com/apptest/geotest2/getTipus.php"
 						dataType:'html',
 						success:function(data) {
 						$('#TipusList').html(data);   
   }
 });
-			})
-		</script>-->
+			})*/-->
+		</script>
     </head>
 
     <body>
@@ -102,8 +117,8 @@
                       <label for="LongX"><h3>Longitud:</h3></label>
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
-			   <button type="button" id="BuscarTipus">Obtenir Tipus</button>
-			   <div data-role="page" id='TipusList'>             
+			   
+			   <div id='TipusList'>             
 					  
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
