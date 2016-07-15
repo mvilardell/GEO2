@@ -1,23 +1,20 @@
+<!doctype html>
 <html>
-	<head>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Geolocalizaci&oacute;n</title>
+        <meta HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1" />
+        <script type="text/javascript" src="cordova.js"></script>
+        <link rel="stylesheet" href="../JQ/jquery.mobile-1.4.2.min.css" />
+		<script src="../JQ/jquery-2.1.1.min.js"></script>
+		<script src="../JQ/jquery.mobile-1.4.2.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="../JS/GoogleMaps.js"></script>
+        <link rel="stylesheet" href="../CSS/index.css" />
 		
-		<title>REGISTRE/BUSQUEDA</title>
-		<script>
-		$(function(){
-			$("#BuscarTipus").click(function(){
-				
-				
-				 $.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
-						cache: false,
-						dataType: "text",
-						success: Buscar
-					})
-				});
-			$("#guardardades").click(function(){
+        <script>
+		$(function() {
+			$("#guardardatos").click(function() {
 				var fNombre = $("#Nombre").val();
    				var fDescripcion = $("#Descripcion").val();
     			var fLatY = $("#LatY").val();
@@ -28,64 +25,64 @@
     			$("#LatY").val(" ");
 				$("#LongX").val(" ");
 				
-				 $.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/agregar.php",
-						data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
-						cache: false,
-						dataType: "text",
-						success: Enviar
-					});
-				});
-			
-			
-				function Enviar(data){
-					alert(data+"Formulari enviat");
-					//$.mobile.changePage("#page3",{transition: "slideup", role:"dialog"});
-				}
+				 $.ajax({type: "POST", 
+						url: "http://www.grupllobet.com/apptest/geotest2/agregar.php",
+                      	data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
+                      cache: false,
+                      dataType: "text",
+                      success: Enviamos
+                    });
 				
-				function Buscar(data){
-					//alert(data);
-					//$.mobile.changePage("#page4",{transition: "slideup", role:"dialog"});
-					$('#PaginaTipus').html(data);
+				});
+				
+				function Enviamos(data){       
+					alert(data+"Reporte enviado");
+					
+					$.mobile.changePage( window.location.href='index.html');
 				}
+			
 			});
 		</script>
-	</head>
-	<body style="background-color:gray">
-	<div data-role="page" id="page2" style="background-color:gray">	
-		<div data-role="fieldcontain">
-			<center><h1>REGISTRE</h1>
-			<form method="POST">
-				<table>
-				<tr>
-					<td><label>Nombre:</label></td> 
-					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
-				</tr>
-				<tr>
-					<td><label>Descripción:</label></td> 
-					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
-				</tr>
-				<tr>
-					<td><label>Latitud:</label></td> 
-					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
-				</tr>
-				<tr>
-					<td><label>Longitud:</label></td> 
-					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
-				</tr>
-				<tr>
-					<td><button type="button" id="BuscarTipus">Obtenir Tipus</button></td>
-					<td><div  id='PaginaTipus' style="background-color:white"></div></td>
-				</tr>
-				<tr>
-					<td><button type="button" id="guardardades">Guardar</button></td>
-					<td><button type="button" onclick="window.location.href='../'">Torna a l'inici</button></td>
-				</tr>
-				</table>
-			</form>
-			</center>
-		</div>
 
-	</div>	
-	</body>
+    </head>
+
+    <body style="background-color:gray">
+    
+        <div data-role="page" id="page2" style="background-color:gray">
+        	<div data-role="header">
+            	<h1>Mi formulario</h1>
+            </div>
+            <!--------INICIA FORMULARIO------>
+			   <div data-role="fieldcontain">
+                    <label for="Nombre">Nombre:</label>
+                    <input type="text" name="Nombre" id="Nombre" value=""  />
+			   </div>
+               <div data-role="fieldcontain">
+                    <label for="Descripcion">Descripcion:</label>
+					<textarea cols="40" rows="8"  name="Descripcion" id="Descripcion" value=""  /></textarea>
+               </div>
+               <div data-role="fieldcontain">
+                    <label for="LatY">Latitud:</label>
+                    <input type="text" disabled="disabled" name="LatY" id="LatY" value=""  />
+               </div>
+               <div data-role="fieldcontain">
+                    <label for="LongX">Longitud:</label>
+                    <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
+               </div>
+			   <div data-role="fieldcontain" >
+					<button type="button" onclick="getTipus()">tipus</button>
+               <div id="TipusList"></div><br/>
+					  
+               </div>
+               <button type="button" data-theme="a" id="guardardatos">Enviar</button>
+			   <button type="button" onclick="window.location.href='index.html'">Torna a l'inici</button>
+			</div>
+            <!--------FIN FORMULARIO------>
+            
+            <div data-role="page" id="page3">
+            	Tu reporte se ha enviado
+            </div>
+    
+        </div>
+    </body>
 </html>
