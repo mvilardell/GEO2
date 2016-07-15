@@ -40,6 +40,23 @@
 					
 					$.mobile.changePage( window.location.href='index.html');
 				}
+			$("#buscardades").click(function(){
+			
+				
+				
+				 $.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: Buscar
+					})
+				});
+			
+				function Buscar(data){
+					//alert(data);
+					//$.mobile.changePage("#page4",{transition: "slideup", role:"dialog"});
+					$('#page5').html(data);
+				}
 			
 			});
 		</script>
@@ -79,7 +96,10 @@
                       <label for="LongX">Longitud:</label>
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
-
+			   <button type="button" id="buscarbades">Buscar Tipus:</button>
+			   <div data-role ="fieldcontain" id="page5">
+					  
+			   </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
 			   <button type="button" onclick="window.location.href='index.html'">Torna a l'inici</button>
             <!--------FIN FORMULARIO------>
