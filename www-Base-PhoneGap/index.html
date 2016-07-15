@@ -11,7 +11,65 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script src="JS/GoogleMaps.js"></script>
         <link rel="stylesheet" href="CSS/index.css" />
-	
+        <script>
+		$(function() {
+			$("#guardardatos").click(function() {
+				var fNombre = $("#Nombre").val();
+   				var fDescripcion = $("#Descripcion").val();
+    			var fLatY = $("#LatY").val();
+				var fLongX = $("#LongX").val();
+				
+				$("#Nombre").val(" ");
+    			$("#Descripcion").val(" ");
+    			$("#LatY").val(" ");
+				$("#LongX").val(" ");
+				
+				 $.ajax({type: "POST", 
+						url: "http://www.grupllobet.com/apptest/geotest2/agregar.php",
+                      	data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
+                      cache: false,
+                      dataType: "text",
+                      success: Enviamos
+                    });
+				
+				});
+				
+				function Enviamos(data){       
+					alert(data+"Reporte enviado");
+					
+					$.mobile.changePage( window.location.href='index.html');
+				}
+			
+			});
+			$("#TipusList").ready(function (){       
+					$.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: BuscarTipus
+					});
+				});
+				function BuscarTipus(data) {
+					$.('#TipusList').html("");
+					for (var i in data){
+						$.("#TipusList").append(data[i]);
+					}
+					//$.('#TipusList').innerHTML(data);
+			
+				}
+			/*$("#BuscarTipus").click(function() {
+				 $.ajax({type: "POST",
+						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: BuscarTipus
+					});
+				});
+				function BuscarTipus(data) {
+						$.mobile.changePage('#TipusList');*/
+			});
+		</script>
+		
     </head>
 
     <body>
@@ -23,9 +81,36 @@
             
             	<div id="map-canvas"></div>
                 
-            <a href="html/formulari.html" id="manda" class="miBoton posicionBoton" ></a>
+            <a href="#page2" id="manda" class="miBoton posicionBoton" ></a>
         </div><!---FIN PAGINA MAPA--->
     	
+        <div data-role="page" id="page2" style="background-color:gray">
+        	<div data-role="header">
+            	<h1>Mi formulario</h1>
+            </div>
+            <!--------INICIA FORMULARIO------>
+            <div data-role="fieldcontain">
+                <label for="Nombre"><h3>Nombre:</h3></label>
+                <input type="text" name="Nombre" id="Nombre" value=""  />
+            </div>
+            <div data-role="fieldcontain">
+                <label for="Descripcion"><h3>Descripcion:</h3></label>
+                <textarea cols="40" rows="8"  name="Descripcion" id="Descripcion" value=""  /></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="LatY"><h3>Latitud:</h3></label>
+                <input type="text" disabled="disabled" name="LatY" id="LatY" value=""  />
+            </div>
+            <div data-role="fieldcontain">
+                <label for="LongX"><h3>Longitud:</h3></label>
+                <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
+            </div>  
+			<div id="TipusList">             
+					
+            </div>
+                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
+			    <button type="button" onclick="window.location.href='index.html'">Torna a l'inici</button>
+            <!--------FIN FORMULARIO------>
 
             <div data-role="footer" data-position="fixed">
             	<h1>Pie de pagina</h1>
