@@ -5,55 +5,13 @@
         <title>Geolocalizaci&oacute;n</title>
         <meta HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1" />
         <script type="text/javascript" src="cordova.js"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
+		<script src="JQ/jquery-2.1.1.min.js"></script>
+		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script src="JS/GoogleMaps.js"></script>
         <link rel="stylesheet" href="CSS/index.css" />
-        <script>
-		$(function() {
-			$("#guardardatos").click(function() {
-				var fNombre = $("#Nombre").val();
-   				var fDescripcion = $("#Descripcion").val();
-    			var fLatY = $("#LatY").val();
-				var fLongX = $("#LongX").val();
-				
-				$("#Nombre").val(" ");
-    			$("#Descripcion").val(" ");
-    			$("#LatY").val(" ");
-				$("#LongX").val(" ");
-				
-				 $.ajax({type: "POST", 
-						url: "http://www.grupllobet.com/apptest/geotest2/agregar.php",
-                      	data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
-                      cache: false,
-                      dataType: "text",
-                      success: Enviamos
-                    });
-				
-				});						
-			$("#manda").click(function (){       
-					$.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
-						cache: false,
-						dataType: "text",
-						success: BuscarTipus
-					});
-				});
-				
-				function Enviamos(data){       
-					alert(data+"Reporte enviado");
-					
-					$.mobile.changePage( window.location.href='index.html');
-				}
-				
-				function BuscarTipus(data) {
-					$.('#TipusList').html(data);
-				}
-			});
-		</script>
-		
+	
     </head>
 
     <body>
