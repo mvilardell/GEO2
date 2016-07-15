@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		<title>REGISTRE/BUSQUEDA</title>
+		<script>
+		$(function(){
+			$("#BuscarTipus").click(function(){
+				
+				
+				 $.ajax({type: "POST",
+						url:"../php/getTipus.php",
+						cache: false,
+						dataType: "text",
+						success: Buscar
+					})
+				});
+			$("#guardardades").click(function(){
+				var fNombre = $("#Nombre").val();
+   				var fDescripcion = $("#Descripcion").val();
+    			var fLatY = $("#LatY").val();
+				var fLongX = $("#LongX").val();
+				
+				$("#Nombre").val(" ");
+    			$("#Descripcion").val(" ");
+    			$("#LatY").val(" ");
+				$("#LongX").val(" ");
+				
+				 $.ajax({type: "POST",
+						url:"../php/agregar.php",
+						data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
+						cache: false,
+						dataType: "text",
+						success: Enviar
+					});
+				});
+			
+			
+				function Enviar(data){
+					alert(data+"Formulari enviat");
+					//$.mobile.changePage("#page3",{transition: "slideup", role:"dialog"});
+				}
+				
+				function Buscar(data){
+					//alert(data);
+					//$.mobile.changePage("#page4",{transition: "slideup", role:"dialog"});
+					$('#PaginaTipus').html(data);
+				}
+			});
+		</script>
+	</head>
+	<body style="background-color:gray">
+	<div data-role="page" id="page2" style="background-color:gray">	
+		<div data-role="fieldcontain">
+			<center><h1>REGISTRE</h1>
+			<form method="POST">
+				<table>
+				<tr>
+					<td><label>Nombre:</label></td> 
+					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
+				</tr>
+				<tr>
+					<td><label>Descripción:</label></td> 
+					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
+				</tr>
+				<tr>
+					<td><label>Latitud:</label></td> 
+					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
+				</tr>
+				<tr>
+					<td><label>Longitud:</label></td> 
+					<td><input type="text" name="TEXT" id="TEXT" value=""></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="BuscarTipus">Obtenir Tipus</button></td>
+					<td><div  id='PaginaTipus' style="background-color:white"></div></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="guardardades">Guardar</button></td>
+					<td><button type="button" onclick="window.location.href='../'">Torna a l'inici</button></td>
+				</tr>
+				</table>
+			</form>
+			</center>
+		</div>
+
+	</div>	
+	</body>
+</html>
