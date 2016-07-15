@@ -44,17 +44,18 @@
 						success: BuscarTipus
 					});
 				});
-				
+					function BuscarTipus(data) {
+					alert(data);
+					$.('#TipusList').html(data);
+				}
+			
 				function Enviamos(data){       
 					alert(data+"Reporte enviado");
 					
 					$.mobile.changePage( window.location.href='index.html');
 				}
-				
-				function BuscarTipus(data) {
-					$.('#TipusList').html(data);
-				}
-			});
+			});	
+			
 		</script>
 		
     </head>
@@ -112,3 +113,4 @@
         </div>
     </body>
 </html>
+
