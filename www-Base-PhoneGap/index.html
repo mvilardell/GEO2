@@ -13,24 +13,24 @@
         <link rel="stylesheet" href="CSS/index.css" />
         <script>
 		$(function() {
-			$("#guardardatos").click(function() {
-				var fNombre = $("#Nombre").val();
-   				var fDescripcion = $("#Descripcion").val();
-    			var fLatY = $("#LatY").val();
-				var fLongX = $("#LongX").val();
-				
-				$("#Nombre").val(" ");
-    			$("#Descripcion").val(" ");
-    			$("#LatY").val(" ");
-				$("#LongX").val(" ");
-				
-				 $.ajax({type: "POST", 
-						url: "http://www.grupllobet.com/apptest/geotest2/agregar.php",
-                      	data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
-                      cache: false,
-                      dataType: "text",
-                      success: Enviamos
-                    });
+				$("#guardardatos").click(function() {
+					var fNombre = $("#Nombre").val();
+					var fDescripcion = $("#Descripcion").val();
+					var fLatY = $("#LatY").val();
+					var fLongX = $("#LongX").val();
+					
+					$("#Nombre").val(" ");
+					$("#Descripcion").val(" ");
+					$("#LatY").val(" ");
+					$("#LongX").val(" ");
+					
+					 $.ajax({type: "POST", 
+							url: "http://www.grupllobet.com/apptest/geotest2/agregar.php",
+							data: ({Nombre: fNombre, Descripcion: fDescripcion, LatY: fLatY, LongX: fLongX}),
+						  cache: false,
+						  dataType: "text",
+						  success: Enviamos
+						});
 				
 				});
 				
@@ -40,33 +40,17 @@
 					$.mobile.changePage( window.location.href='index.html');
 				}
 			
-			});
-			$("#TipusList").ready(function (){       
-					$.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
-						cache: false,
-						dataType: "text",
-						success: BuscarTipus
+				$("#TipusList").ready(function (){       
+						$.ajax({type: "POST",
+							url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
+							cache: false,
+							dataType: "text",
+							success: BuscarTipus
+						});
 					});
-				});
 				function BuscarTipus(data) {
 					$.('#TipusList').html("");
-					for (var i in data){
-						$.("#TipusList").append(data[i]);
-					}
-					//$.('#TipusList').innerHTML(data);
-			
 				}
-			/*$("#BuscarTipus").click(function() {
-				 $.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
-						cache: false,
-						dataType: "text",
-						success: BuscarTipus
-					});
-				});
-				function BuscarTipus(data) {
-						$.mobile.changePage('#TipusList');*/
 			});
 		</script>
 		
