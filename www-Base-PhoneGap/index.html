@@ -32,15 +32,7 @@
                       success: Enviamos
                     });
 				
-				});
-				
-				function Enviamos(data){       
-					alert(data+"Reporte enviado");
-					
-					$.mobile.changePage( window.location.href='index.html');
-				}
-			
-			});
+				});						
 			$("#TipusList").ready(function (){       
 					$.ajax({type: "POST",
 						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
@@ -49,43 +41,19 @@
 						success: BuscarTipus
 					});
 				});
-				function BuscarTipus(data) {
-					alert(data);
-					/*$.('#TipusList').html("");
-					for (var i in data){
-						$.("#TipusList").append(data[i]);
-					}*/
-					//$.('#TipusList').innerHTML(data);
-			
+				
+				function Enviamos(data){       
+					alert(data+"Reporte enviado");
+					
+					$.mobile.changePage( window.location.href='index.html');
 				}
-			/*$("#BuscarTipus").click(function() {
-				 $.ajax({type: "POST",
-						url:"http://www.grupllobet.com/apptest/geotest2/getTipus.php",
-						cache: false,
-						dataType: "text",
-						success: BuscarTipus
-					});
-				});
+				
 				function BuscarTipus(data) {
-						$.mobile.changePage('#TipusList');
-			});*/
+					$.('#TipusList').html(data);
+				}
+			});
 		</script>
 		
-		<script type ="text/javascript">
-		
-			<!--$("document").ready(function(){
-				
-				/*$("#TipusList").load("php/getTipus.php");
-				
-				$.ajax({type:"POST",
-						url: php/getTipus.php /*http://www.grupllobet.com/apptest/geotest2/getTipus.php"
-						dataType:'html',
-						success:function(data) {
-						$('#TipusList').html(data);   
-  }
-});
-			})*/-->
-		</script>
     </head>
 
     <body>
@@ -122,8 +90,8 @@
                       <input type="text" disabled="disabled" name="LongX" id="LongX" value="" />
                </div>
 			   
-			   <div data-role="fieldcontain">             
-					<p id="TipusList"></p>
+			   <div id='TipusList'>             
+					
                </div>
                <button type="button" data-theme="a" id="guardardatos">Enviar</button>
 			   <button type="button" onclick="window.location.href='index.html'">Torna a l'inici</button>
